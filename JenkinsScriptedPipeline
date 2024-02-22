@@ -22,7 +22,7 @@ node{
         def dockerrun = 'docker run -p 8000:80 -d --name amarrathod amardocker27/cicd'
         sshagent(['dockerhostpassword']){
     // some block
-        sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.12.201 ${dockerrun}"
+        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.12.201 ${dockerrun}"
 }
     }  
 

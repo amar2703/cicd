@@ -16,5 +16,14 @@ node{
         sh 'docker image push amardocker27/$JOB_NAME:latest'
         sh 'docker image rmi $JOB_NAME:v1.$BUILD_ID amardocker27/$JOB_NAME:v1.$BUILD_ID amardocker27/$JOB_NAME:latest'
 }
-    }   
+    }  
+
+    stage("Deployment of Docker Container"){
+        def dockerrun = 'docker run -p 8000:80 -d --name amarrathod amardocker27/cicd'
+        sshagent(['dockerhostpassword')]){
+    // some block
+        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.14.254.143 ${dockerrun}"
+}
+    }  
+
 }
